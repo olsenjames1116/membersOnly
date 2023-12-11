@@ -15,7 +15,17 @@ exports.userCreatePost = [
 	// Validate and sanitize fields.
 	body('firstName', 'First name must not be empty').trim().escape().notEmpty(),
 	body('lastName', 'Last name must not be empty.').trim().escape().notEmpty(),
-	body('username', 'Username must not be empty.').trim().escape().notEmpty(),
+	body('username')
+		.trim()
+		.escape()
+		.notEmpty()
+		.withMessage('Username must not be empty.')
+		.custom(async (username) => {
+			const user = await User.findOne({ username: username });
+			if (user) {
+				throw new Error('Username is already in use.');
+			}
+		}),
 	body('password', 'Password must not be empty.').trim().escape().notEmpty(),
 	body('confirmPassword')
 		.trim()
