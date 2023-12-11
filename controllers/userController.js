@@ -86,3 +86,5 @@ exports.userCreatePost =
 			return next(err);
 		}
 	};
+
+exports.userLogInGet = async function (req, res, next) {};
