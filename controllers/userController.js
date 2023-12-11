@@ -50,7 +50,7 @@ const storeUser = (user) => {
 	});
 };
 
-// Display sign up from on post.
+// Display sign up form on post.
 exports.userCreatePost =
 	// Process request after validation and sanitization.
 	async (req, res, next) => {
@@ -87,9 +87,19 @@ exports.userCreatePost =
 		}
 	};
 
+// Display log in form on get.
 exports.userLogInGet = async function (req, res, next) {
 	try {
 		res.render('logInForm', { title: 'Log In' });
+	} catch (err) {
+		return next(err);
+	}
+};
+
+// Display log in form on post.
+exports.userLogInPost = async function (req, res, next) {
+	try {
+		validateLogIn;
 	} catch (err) {
 		return next(err);
 	}
