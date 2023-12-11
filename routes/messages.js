@@ -10,6 +10,10 @@ router.get('/', messageController.messageListGet);
 router.get('/message-form', messageController.messageCreateGet);
 
 // POST the new message form.
-router.post('/message-form', messageController.messageCreatePost);
+router.post(
+	'/message-form',
+	messageController.validateMessage,
+	messageController.messageCreatePost
+);
 
 module.exports = router;

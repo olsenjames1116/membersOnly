@@ -2,8 +2,9 @@ extends layout
 
 block content
     h1= title
-    a(href='/messages/message-form')
-        button(type='button') New Message
+    if currentUser
+        a(href='/messages/message-form')
+            button(type='button') New Message
 
     if messages
         ul
