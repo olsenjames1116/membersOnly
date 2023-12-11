@@ -87,4 +87,10 @@ exports.userCreatePost =
 		}
 	};
 
-exports.userLogInGet = async function (req, res, next) {};
+exports.userLogInGet = async function (req, res, next) {
+	try {
+		res.render('logInForm', { title: 'Log In' });
+	} catch (err) {
+		return next(err);
+	}
+};
