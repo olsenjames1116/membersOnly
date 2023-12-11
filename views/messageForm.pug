@@ -5,7 +5,7 @@ block content
 
     form(method='POST', action='')
         label(for='text') Message:
-        input#text(type='text', name='text', required='true', value=message ? message.text : '')
+        textarea#text(name='text', required='true', value=message ? message.text : '')
 
         button(type='submit') Submit
 

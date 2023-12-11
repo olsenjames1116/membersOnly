@@ -7,9 +7,7 @@ const messageController = require('../controllers/messageController');
 router.get('/', messageController.messageListGet);
 
 // GET the new message form.
-router.get('/message-form', (req, res, next) => {
-	res.send('NOT IMPLEMENTED: NEW MESSAGE GET.');
-});
+router.get('/message-form', messageController.messageCreateGet);
 
 // POST the new message form.
 router.post('/message-form', (req, res, next) => {
