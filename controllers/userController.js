@@ -107,3 +107,12 @@ exports.userLogInPost = (req, res, next) => {
 	});
 	handleAuthentication(req, res, next);
 };
+
+exports.userLogOutGet = (req, res, next) => {
+	req.logout((err) => {
+		if (err) {
+			return next(err);
+		}
+		res.redirect('/');
+	});
+};
