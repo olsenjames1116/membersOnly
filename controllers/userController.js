@@ -11,9 +11,8 @@ exports.userCreateGet = async function (req, res, next) {
 	}
 };
 
-// Display sign up from on post.
-exports.userCreatePost = [
-	// Validate and sanitize fields.
+// Validate and sanitize fields.
+exports.validateUser = [
 	body('firstName', 'First name must not be empty').trim().escape().notEmpty(),
 	body('lastName', 'Last name must not be empty.').trim().escape().notEmpty(),
 	body('username')
@@ -37,6 +36,22 @@ exports.userCreatePost = [
 			return confirmPassword === req.body.password;
 		})
 		.withMessage('Passwords must match.'),
+];
+
+// Hash the password before storing in the database.
+const storeUser = (user) => {
+	bcrypt.hash(user.password, 10, async (err, hashedPassword) => {
+		if (err) {
+			return next(err);
+		} else {
+			user.password = hashedPassword;
+			await user.save();
+		}
+	});
+};
+
+// Display sign up from on post.
+exports.userCreatePost =
 	// Process request after validation and sanitization.
 	async (req, res, next) => {
 		try {
@@ -64,20 +79,10 @@ exports.userCreatePost = [
 				return;
 			} else {
 				// Data from form is valid. Save user.
-
-				// Hash the password before storing in the database.
-				bcrypt.hash(user.password, 10, async (err, hashedPassword) => {
-					if (err) {
-						return next(err);
-					} else {
-						user.password = hashedPassword;
-						await user.save();
-						res.redirect('/');
-					}
-				});
+				storeUser(user);
+				res.redirect('/');
 			}
 		} catch (err) {
 			return next(err);
 		}
-	},
-];
+	};

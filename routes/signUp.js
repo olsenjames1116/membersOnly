@@ -7,6 +7,6 @@ const userController = require('../controllers/userController');
 router.get('/', userController.userCreateGet);
 
 // POST sign up form.
-router.post('/', userController.userCreatePost);
+router.post('/', userController.validateUser, userController.userCreatePost);
 
 module.exports = router;
