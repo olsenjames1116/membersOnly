@@ -1,16 +1,16 @@
 const User = require('../models/user');
 
 // Display sign up form on get.
-exports.signUpGet = async function (req, res, next) {
+exports.userCreateGet = async function (req, res, next) {
 	try {
-		res.send('NOT IMPLEMENTED: Sign up get');
+		res.render('signUpForm', { title: 'Sign Up' });
 	} catch (err) {
 		return next(err);
 	}
 };
 
 // Display sign up from on post.
-exports.signUpPost = async function (req, res, next) {
+exports.userCreatePost = async function (req, res, next) {
 	try {
 		res.send('NOT IMPLEMENTED: Sign up post');
 	} catch (err) {
