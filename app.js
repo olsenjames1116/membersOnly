@@ -14,6 +14,7 @@ const flash = require('connect-flash');
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/signUp');
 const logInRouter = require('./routes/login');
+const logOutRouter = require('./routes/logout');
 
 const User = require('./models/user');
 
@@ -82,6 +83,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use((req, res, next) => {
+	res.locals.currentUser = req.user;
+	next();
+});
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -89,6 +94,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/log-in', logInRouter);
+app.use('/log-out', logOutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
