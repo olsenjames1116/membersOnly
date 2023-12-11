@@ -1,23 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const Message = require('../models/message');
+const messageController = require('../controllers/messageController');
 
 // GET a list of all messages.
-router.get('/', async (req, res, next) => {
-	try {
-		const allMessages = await Message.find({}, 'text')
-			.sort({ timestamp: -1 })
-			.exec();
-
-		res.render('messageList', {
-			title: 'Grapevine Posts',
-			messages: allMessages,
-		});
-	} catch (err) {
-		return next(err);
-	}
-});
+router.get('/', messageController.messageListGet);
 
 // GET the new message form.
 router.get('/message-form', (req, res, next) => {
