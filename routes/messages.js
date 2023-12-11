@@ -1,9 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
+const Message = require('../models/message');
+
 // GET a list of all messages.
-router.get('/', (req, res, next) => {
-	res.send('NOT IMPLEMENTED: LIST OF ALL MESSAGES.');
+router.get('/', async (req, res, next) => {
+	try {
+		const allMessages = await Message.find({}, 'text')
+			.sort({ timestamp: -1 })
+			.exec();
+
+		res.render('messageList', {
+			title: 'Grapevine Posts',
+			messages: allMessages,
+		});
+	} catch (err) {
+		return next(err);
+	}
 });
 
 // GET the new message form.
