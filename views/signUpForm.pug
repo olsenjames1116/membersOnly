@@ -20,3 +20,7 @@ block content
         input#confirmPassword(type='password', name='confirmPassword', required='true', value=user ? confirmPassword : '')
 
         button(type='submit') Sign Up
+    if errors 
+        ul
+            each error in errors 
+                li= error.msg
