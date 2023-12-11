@@ -10,8 +10,6 @@ router.get('/', messageController.messageListGet);
 router.get('/message-form', messageController.messageCreateGet);
 
 // POST the new message form.
-router.post('/message-form', (req, res, next) => {
-	res.send('NOT IMPLEMENTED: NEW MESSAGE POST.');
-});
+router.post('/message-form', messageController.messageCreatePost);
 
 module.exports = router;

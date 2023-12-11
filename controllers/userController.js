@@ -69,7 +69,6 @@ exports.userCreatePost =
 
 			if (!errors.isEmpty()) {
 				// There are errors. Render form again with sanitized values/error messages.
-
 				res.render('signUpForm', {
 					title: 'Sign Up',
 					user: user,
