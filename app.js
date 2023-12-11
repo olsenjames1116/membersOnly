@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
+const bcrypt = require('bcrypt');
+const flash = require('connect-flash');
 
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/signUp');
@@ -39,11 +41,15 @@ passport.use(
 		try {
 			const user = await User.findOne({ username: username });
 			if (!user) {
-				return done(null, false, { message: 'Incorrect username.' });
+				return done(null, false, {
+					message: 'Incorrect username or password.',
+				});
 			}
 			const match = await bcrypt.compare(password, user.password);
 			if (!match) {
-				return done(null, false, { message: 'Incorrect password.' });
+				return done(null, false, {
+					message: 'Incorrect username or password.',
+				});
 			}
 			return done(null, user);
 		} catch (err) {
@@ -66,9 +72,16 @@ passport.deserializeUser(async (id, done) => {
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: true,
+	})
+);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 // Display sign up form on get.
 exports.userCreateGet = async function (req, res, next) {
@@ -90,17 +91,19 @@ exports.userCreatePost =
 // Display log in form on get.
 exports.userLogInGet = async function (req, res, next) {
 	try {
-		res.render('logInForm', { title: 'Log In' });
+		const errors = req.flash().error;
+		res.render('logInForm', { title: 'Log In', errors: errors });
 	} catch (err) {
 		return next(err);
 	}
 };
 
 // Display log in form on post.
-exports.userLogInPost = async function (req, res, next) {
-	try {
-		validateLogIn;
-	} catch (err) {
-		return next(err);
-	}
+exports.userLogInPost = (req, res, next) => {
+	const handleAuthentication = passport.authenticate('local', {
+		successRedirect: '/',
+		failureRedirect: '/log-in',
+		failureFlash: true,
+	});
+	handleAuthentication(req, res, next);
 };
