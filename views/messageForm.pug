@@ -2,3 +2,14 @@ extends layout
 
 block content
     h1= title
+
+    form(method='POST', action='')
+        label(for='text') Message:
+        input#text(type='text', name='text', required='true', value=message ? message.text : '')
+
+        button(type='submit') Submit
+
+    if errors
+        ul
+            for error in errors
+                li= error.msg
