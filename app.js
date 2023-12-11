@@ -15,6 +15,7 @@ const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/signUp');
 const logInRouter = require('./routes/login');
 const logOutRouter = require('./routes/logout');
+const messageRouter = require('./routes/messages');
 
 const User = require('./models/user');
 
@@ -95,6 +96,7 @@ app.use('/', indexRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/log-in', logInRouter);
 app.use('/log-out', logOutRouter);
+app.use('/messages', messageRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
