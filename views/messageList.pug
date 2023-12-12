@@ -11,6 +11,10 @@ block content
             each message in messages
                 li
                     p= message.text
-                    div 
-                        span= message.user.fullName
-                        span= message.timestamp
+                    div
+                        if currentUserIsMember
+                            span User: #{message.user.fullName}
+                            span Date: #{message.timestamp}
+                        else
+                            span User: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
+                            span Date: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
