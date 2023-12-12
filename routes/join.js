@@ -7,6 +7,10 @@ const userController = require('../controllers/userController');
 router.get('/', userController.userJoinGet);
 
 // Post on the join form.
-router.post('/', userController.userJoinPost);
+router.post(
+	'/',
+	userController.validateUserMembership,
+	userController.userJoinPost
+);
 
 module.exports = router;
