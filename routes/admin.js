@@ -7,8 +7,10 @@ const userController = require('../controllers/userController');
 router.get('/', userController.userAdminGet);
 
 // Post on the admin form.
-router.post('/', (req, res, next) => {
-	res.send('NOT IMPLEMENTED: ADMIN FORM POST.');
-});
+router.post(
+	'/',
+	userController.validateUserAdmin,
+	userController.userAdminPost
+);
 
 module.exports = router;

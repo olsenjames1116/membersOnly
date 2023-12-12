@@ -195,3 +195,44 @@ exports.userAdminGet = async (req, res, next) => {
 		return next(err);
 	}
 };
+
+// Validate user to become an admin.
+exports.validateUserAdmin = [
+	body('code')
+		.trim()
+		.escape()
+		.notEmpty()
+		.withMessage('Input field cannot be left empty.')
+		.custom(async (code) => {
+			if (code !== process.env.ADMIN_CODE) {
+				throw new Error('Incorrect code.');
+			}
+		}),
+];
+
+// Post route to make user an admin.
+exports.userAdminPost =
+	// Process request after validation and sanitization.
+	async (req, res, next) => {
+		try {
+			// Extract the validation errors from the request.
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty()) {
+				// There are errors. Render form again with sanitized values/error messages.
+				res.render('adminForm', {
+					title: 'Become an Admin',
+					code: req.body.code,
+					errors: errors.array(),
+				});
+
+				return;
+			} else {
+				// Data from form is valid. Update the admin status of the user.
+				await User.findByIdAndUpdate(req.user._id, { isAdmin: true });
+				res.redirect('/');
+			}
+		} catch (err) {
+			return next(err);
+		}
+	};
