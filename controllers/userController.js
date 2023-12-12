@@ -115,6 +115,7 @@ exports.userLogInPost = (req, res, next) => {
 	handleAuthentication(req, res, next);
 };
 
+// Get route to log user out.
 exports.userLogOutGet = (req, res, next) => {
 	req.logout((err) => {
 		if (err) {

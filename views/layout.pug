@@ -12,6 +12,8 @@ html
           a(href='/') Home
         div.links
           if currentUser 
+            if !currentUserIsMember
+              a(href='/join') Join the Club
             a(href='/log-out') Log Out
           else
             a(href='/log-in') Log In
