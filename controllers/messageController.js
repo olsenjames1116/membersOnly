@@ -20,9 +20,13 @@ exports.messageListGet = async (req, res, next) => {
 // Display new message form on get.
 exports.messageCreateGet = async (req, res, next) => {
 	try {
-		res.render('messageForm', {
-			title: 'New Message',
-		});
+		if (!req.user) {
+			res.redirect('/');
+		} else {
+			res.render('messageForm', {
+				title: 'New Message',
+			});
+		}
 	} catch (err) {
 		return next(err);
 	}
