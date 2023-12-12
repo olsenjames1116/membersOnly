@@ -155,24 +155,41 @@ exports.validateUserMembership = [
 ];
 
 // Post route to make a user a member.
-exports.userJoinPost = async (req, res, next) => {
+exports.userJoinPost =
+	// Process request after validation and sanitization.
+	async (req, res, next) => {
+		try {
+			// Extract the validation errors from the request.
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty()) {
+				// There are errors. Render form again with sanitized values/error messages.
+				res.render('joinForm', {
+					title: 'Join the Club',
+					code: req.body.code,
+					errors: errors.array(),
+				});
+
+				return;
+			} else {
+				// Data from form is valid. Update the membership of user.
+				await User.findByIdAndUpdate(req.user._id, { isMember: true });
+				res.redirect('/');
+			}
+		} catch (err) {
+			return next(err);
+		}
+	};
+
+// Get route to make user an admin.
+exports.userAdminGet = async (req, res, next) => {
 	try {
-		// Extract the validation errors from the request.
-		const errors = validationResult(req);
-
-		if (!errors.isEmpty()) {
-			// There are errors. Render form again with sanitized values/error messages.
-			res.render('joinForm', {
-				title: 'Join the Club',
-				code: req.body.code,
-				errors: errors.array(),
-			});
-
-			return;
-		} else {
-			// Data from form is valid. Update the membership of user.
-			await User.findByIdAndUpdate(req.user._id, { isMember: true });
+		if (!req.user || req.user.isAdmin) {
 			res.redirect('/');
+		} else {
+			res.render('adminForm', {
+				title: 'Become an Admin',
+			});
 		}
 	} catch (err) {
 		return next(err);
