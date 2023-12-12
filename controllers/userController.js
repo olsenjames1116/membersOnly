@@ -139,3 +139,40 @@ exports.userJoinGet = (req, res, next) => {
 		return next(err);
 	}
 };
+
+// Post route to make a user a member.
+exports.userJoinPost = [
+	body('code')
+		.trim()
+		.escape()
+		.notEmpty()
+		.withMessage('Input field cannot be left empty.')
+		.custom(async (code) => {
+			if (code !== process.env.MEMBER_CODE) {
+				throw new Error('Incorrect code.');
+			}
+		}),
+	async (req, res, next) => {
+		try {
+			// Extract the validation errors from the request.
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty()) {
+				// There are errors. Render form again with sanitized values/error messages.
+				res.render('joinForm', {
+					title: 'Join the Club',
+					code: req.body.code,
+					errors: errors.array(),
+				});
+
+				return;
+			} else {
+				// Data from form is valid. Update the membership of user.
+				await User.findByIdAndUpdate(req.user._id, { isMember: true });
+				res.redirect('/');
+			}
+		} catch (err) {
+			return next(err);
+		}
+	},
+];
