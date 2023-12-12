@@ -17,6 +17,7 @@ const logInRouter = require('./routes/login');
 const logOutRouter = require('./routes/logout');
 const messageRouter = require('./routes/messages');
 const joinRouter = require('./routes/join');
+const adminRouter = require('./routes/admin');
 
 const User = require('./models/user');
 
@@ -95,12 +96,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set up routes.
 app.use('/', indexRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/log-in', logInRouter);
 app.use('/log-out', logOutRouter);
 app.use('/messages', messageRouter);
 app.use('/join-form', joinRouter);
+app.use('/admin-form', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
