@@ -94,8 +94,12 @@ exports.userCreatePost =
 // Display log in form on get.
 exports.userLogInGet = async function (req, res, next) {
 	try {
-		const errors = req.flash().error;
-		res.render('logInForm', { title: 'Log In', errors: errors });
+		if (req.user) {
+			res.redirect('/');
+		} else {
+			const errors = req.flash().error;
+			res.render('logInForm', { title: 'Log In', errors: errors });
+		}
 	} catch (err) {
 		return next(err);
 	}
