@@ -13,7 +13,9 @@ html
         div.links
           if currentUser 
             if !currentUserIsMember
-              a(href='/join') Join the Club
+              a(href='/join-form') Join the Club
+            if ! currentUserIsAdmin
+              a(href='/admin-form') Become an Admin
             a(href='/log-out') Log Out
           else
             a(href='/log-in') Log In

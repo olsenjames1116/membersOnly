@@ -88,6 +88,7 @@ app.use(flash());
 app.use((req, res, next) => {
 	res.locals.currentUser = req.user;
 	res.locals.currentUserIsMember = req.user ? req.user.isMember : '';
+	res.locals.currentUserIsAdmin = req.user ? req.user.isAdmin : '';
 	next();
 });
 app.use(express.urlencoded({ extended: false }));
@@ -99,7 +100,7 @@ app.use('/sign-up', signUpRouter);
 app.use('/log-in', logInRouter);
 app.use('/log-out', logOutRouter);
 app.use('/messages', messageRouter);
-app.use('/join', joinRouter);
+app.use('/join-form', joinRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
