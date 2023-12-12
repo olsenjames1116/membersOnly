@@ -48,6 +48,7 @@ exports.messageCreatePost =
 			const message = new Message({
 				text: req.body.text,
 				timestamp: Date.now(),
+				user: req.user,
 			});
 
 			if (!errors.isEmpty()) {
