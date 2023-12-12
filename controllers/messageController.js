@@ -4,7 +4,8 @@ const Message = require('../models/message');
 // Display message list on get.
 exports.messageListGet = async (req, res, next) => {
 	try {
-		const allMessages = await Message.find({}, 'text')
+		const allMessages = await Message.find()
+			.populate('user')
 			.sort({ timestamp: -1 })
 			.exec();
 

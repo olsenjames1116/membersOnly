@@ -8,5 +8,9 @@ block content
 
     if messages
         ul
-            for message in messages
-                li= message.text
+            each message in messages
+                li
+                    p= message.text
+                    div 
+                        span= message.user.fullName
+                        span= message.timestamp
