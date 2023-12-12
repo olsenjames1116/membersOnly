@@ -124,3 +124,18 @@ exports.userLogOutGet = (req, res, next) => {
 		res.redirect('/');
 	});
 };
+
+// Get route to make a user a member.
+exports.userJoinGet = (req, res, next) => {
+	try {
+		if (!req.user || req.user.isMember) {
+			res.redirect('/');
+		} else {
+			res.render('joinForm', {
+				title: 'Join the Club',
+			});
+		}
+	} catch (err) {
+		return next(err);
+	}
+};
