@@ -6,7 +6,11 @@ const passport = require('passport');
 // Display sign up form on get.
 exports.userCreateGet = async function (req, res, next) {
 	try {
-		res.render('signUpForm', { title: 'Sign Up' });
+		if (req.user) {
+			res.redirect('/');
+		} else {
+			res.render('signUpForm', { title: 'Sign Up' });
+		}
 	} catch (err) {
 		return next(err);
 	}
