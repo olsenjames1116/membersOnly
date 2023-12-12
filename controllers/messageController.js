@@ -18,6 +18,16 @@ exports.messageListGet = async (req, res, next) => {
 	}
 };
 
+// Delete a message on post.
+exports.messageListPost = async (req, res, next) => {
+	try {
+		await Message.findByIdAndDelete(req.body.messageId);
+		res.redirect('/');
+	} catch (err) {
+		return next(err);
+	}
+};
+
 // Display new message form on get.
 exports.messageCreateGet = async (req, res, next) => {
 	try {

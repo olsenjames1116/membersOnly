@@ -18,3 +18,8 @@ block content
                         else
                             span User: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
                             span Date: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
+                    if currentUserIsAdmin
+                        form(method='POST', action='')
+                            input(type='hidden', name='messageId', required='true', value=message._id)
+
+                            button(type='submit') Delete Message
