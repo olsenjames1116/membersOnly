@@ -8,6 +8,8 @@ block content
         textarea#text(name='text', required='true', value=message ? message.text : '')
 
         button(type='submit') Submit
+        a(href='/messages')
+            button(type='button') Cancel
 
     if errors
         ul
