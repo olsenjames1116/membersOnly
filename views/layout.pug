@@ -2,29 +2,30 @@ doctype html
 html
   head
     title= title
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='icon', href='/images/grape.png')
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/stylesheets/style.css")
+    link(rel="icon", href="/images/grape.png")
   body
-    header 
-      nav 
-        div.logo
-          a(href='/')
-            img(src='/images/grape.png')
+    header
+      nav
+        .logo
+          a(href="/")
+            img(src="/images/grape.png")
             span Grapevine
-        div.links
-          if currentUser 
+        .links
+          if currentUser
             if !currentUserIsMember
-              a(href='/join-form') Join the Club
+              a(href="/join-form") Join the Club
             if ! currentUserIsAdmin
-              a(href='/admin-form') Become an Admin
-            a(href='/log-out') Log Out
+              a(href="/admin-form") Become an Admin
+            a(href="/log-out") Log Out
           else
-            a(href='/log-in') Log In
-            a(href='/sign-up') Sign Up
+            a(href="/log-in") Log In
+            a(href="/sign-up") Sign Up
     main
       block content
     footer
-      p Built and designed by 
-        a(href='https://github.com/olsenjames1116') olsenjames1116
+      p Built and designed by
+        |
+        a(href="https://github.com/olsenjames1116") olsenjames1116

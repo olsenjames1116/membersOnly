@@ -1,26 +1,31 @@
 extends layout
 
 block content
-    h1= title
-    if currentUser
-        div.newMessage
-            a(href='/messages/message-form')
-                button.create(type='button') + New Message
+  h1= title
+  if currentUser
+    .newMessage
+      a(href="/messages/message-form")
+        button.create(type="button") + New Message
 
-    if messages
-        ul.messages
-            each message in messages
-                li
-                    p.messageText= message.text
-                    div.messageInfo
-                        if currentUserIsMember
-                            span #[strong User:] #{message.user.fullName}
-                            span #[strong Date:] #{message.timestampFormatted}
-                        else
-                            span User: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
-                            span Date: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
-                    if currentUserIsAdmin
-                        form.deleteMessage(method='POST', action='')
-                            input(type='hidden', name='messageId', required='true', value=message._id)
+  if messages
+    ul.messages
+      each message in messages
+        li
+          p.messageText= message.text
+          .messageInfo
+            if currentUserIsMember
+              span #[strong User:] #{ message.user.fullName }
+              span #[strong Date:] #{ message.timestampFormatted }
+            else
+              span User: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
+              span Date: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
+          if currentUserIsAdmin
+            form.deleteMessage(method="POST", action="")
+              input(
+                type="hidden",
+                name="messageId",
+                required="true",
+                value=message._id
+              )
 
-                            button.delete(type='submit') Delete Message
+              button.delete(type="submit") Delete Message

@@ -1,26 +1,54 @@
 extends layout
 
 block content
-    h1= title
+  h1= title
 
-    form.main.user(method='POST', action='')
-        label(for='firstName') First Name: 
-        input#firstName(type='text', name='firstName', placeholder='Peter', required='true', value=user ? user.firstName : '')
+  form.main.user(method="POST", action="")
+    label(for="firstName") First Name:
+    input#firstName(
+      type="text",
+      name="firstName",
+      placeholder="Peter",
+      required="true",
+      value=user ? user.firstName : ""
+    )
 
-        label(for='lastName') Last Name:
-        input#lastName(type='text', name='lastName', placeholder='Parker', required='true', value=user ? user.lastName : '')
+    label(for="lastName") Last Name:
+    input#lastName(
+      type="text",
+      name="lastName",
+      placeholder="Parker",
+      required="true",
+      value=user ? user.lastName : ""
+    )
 
-        label(for='username') Username:
-        input#username(type='text', name='username', placeholder='neighborhoodSpider', required='true', value=user ? user.username : '')
+    label(for="username") Username:
+    input#username(
+      type="text",
+      name="username",
+      placeholder="neighborhoodSpider",
+      required="true",
+      value=user ? user.username : ""
+    )
 
-        label(for='password') Password:
-        input#password(type='password', name='password', required='true', value=user ? user.password : '')
+    label(for="password") Password:
+    input#password(
+      type="password",
+      name="password",
+      required="true",
+      value=user ? user.password : ""
+    )
 
-        label(for='confirmPassword') Confirm Password:
-        input#confirmPassword(type='password', name='confirmPassword', required='true', value=user ? confirmPassword : '')
+    label(for="confirmPassword") Confirm Password:
+    input#confirmPassword(
+      type="password",
+      name="confirmPassword",
+      required="true",
+      value=user ? confirmPassword : ""
+    )
 
-        button.create(type='submit') Sign Up
-    if errors 
-        ul.errors
-            each error in errors 
-                li= error.msg
+    button.create(type="submit") Sign Up
+  if errors
+    ul.errors
+      each error in errors 
+        li= error.msg

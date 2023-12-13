@@ -1,17 +1,21 @@
 extends layout
 
 block content
-    h1= title
+  h1= title
 
-    form.main(method='POST', action='')
-        label(for='text') Message:
-        textarea#text(name='text', required='true', value=message ? message.text : '')
+  form.main(method="POST", action="")
+    label(for="text") Message:
+    textarea#text(
+      name="text",
+      required="true",
+      value=message ? message.text : ""
+    )
 
-        button.create(type='submit') Submit
-        a(href='/messages')
-            button.cancel(type='button') Cancel
+    button.create(type="submit") Submit
+    a(href="/messages")
+      button.cancel(type="button") Cancel
 
-    if errors
-        ul.errors
-            each error in errors
-                li= error.msg
+  if errors
+    ul.errors
+      each error in errors
+        li= error.msg
