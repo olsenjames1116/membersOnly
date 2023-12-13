@@ -1,8 +1,199 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@font-face {
+	font-family: 'newGardenLight';
+	src:
+		url('../fonts/newgardenlight-webfont.woff2') format('woff2'),
+		url('../fonts/newgardenlight-webfont.woff') format('woff');
 }
 
-a {
-  color: #00B7FF;
+:root {
+	--darkest: #a679ca;
+	--dark: #c8b4e1;
+	--medium: #e6c9e1;
+	--light: #afd7f7;
+	--lightest: #f4e6ba;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+header {
+	padding: 20px;
+	background-color: var(--darkest);
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+
+	&& a {
+		text-decoration: none;
+		color: white;
+	}
+}
+
+div.logo > a {
+	display: flex;
+	align-items: center;
+	font-family: 'newGardenLight';
+	font-size: 3rem;
+	gap: 5px;
+}
+
+div.links {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	font-size: 1.2rem;
+
+	&& > a:hover {
+		filter: contrast(80%);
+	}
+}
+
+main {
+	background-color: var(--lightest);
+	flex-grow: 1;
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+}
+
+div.newMessage {
+	display: flex;
+	justify-content: center;
+}
+
+button.create {
+	background-color: var(--light);
+	border: 0;
+	border-radius: 3px;
+	padding: 10px;
+	align-self: center;
+	transition-property: transform;
+	transition-duration: 1s;
+
+	&&:hover,
+	&&:focus {
+		filter: contrast(80%);
+		transform: scale(1.1);
+	}
+}
+
+ul.messages {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 10px 20px 5px gray;
+
+	&& > li {
+		padding: 10px;
+		display: grid;
+		justify-content: space-between;
+	}
+
+	&& > li:nth-child(odd) {
+		background-color: var(--dark);
+	}
+	&& > li:nth-child(even) {
+		background-color: var(--medium);
+	}
+}
+
+p.messageText {
+	grid-area: 1 / 1 / 2 / 2;
+}
+
+div.messageInfo {
+	grid-area: 1 / 2 / 2 / 3;
+	display: flex;
+	flex-direction: column;
+}
+
+form.deleteMessage {
+	grid-area: 2 / 1 / 3 / 3;
+	justify-self: center;
+}
+
+button.delete {
+	background-color: #dc3545;
+	border: 0;
+	border-radius: 3px;
+	padding: 5px;
+	color: white;
+
+	&&:hover,
+	&&:focus {
+		filter: contrast(80%);
+	}
+}
+
+form.main {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	font-size: 1.5rem;
+
+	&& > input {
+		font-size: 1.5rem;
+		font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif'
+	}
+
+	&& > textarea {
+		height: 50%;
+		overflow: scroll;
+		font-size: 1.5rem;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+			sans-serif;
+	}
+
+	&& > button,
+	&& > a {
+		align-self: center;
+		width: 25%;
+	}
+}
+
+button.cancel {
+	background-color: gray;
+	color: white;
+	border: 0;
+	padding: 10px;
+	border-radius: 3px;
+	width: 100%;
+	transition-property: transform;
+	transition-duration: 1s;
+
+	&&:hover,
+	&&:focus {
+		transform: scale(1.1);
+	}
+}
+
+ul.errors > li {
+	color: #dc3545
+}
+
+footer {
+	background-color: var(--darkest);
+	display: flex;
+	justify-content: center;
+	color: white;
+
+	& a {
+		text-decoration: none;
+		color: var(--lightest);
+	}
 }

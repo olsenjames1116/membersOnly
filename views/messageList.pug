@@ -3,23 +3,24 @@ extends layout
 block content
     h1= title
     if currentUser
-        a(href='/messages/message-form')
-            button(type='button') New Message
+        div.newMessage
+            a(href='/messages/message-form')
+                button.create(type='button') + New Message
 
     if messages
-        ul
+        ul.messages
             each message in messages
                 li
-                    p= message.text
-                    div
+                    p.messageText= message.text
+                    div.messageInfo
                         if currentUserIsMember
-                            span User: #{message.user.fullName}
-                            span Date: #{message.timestampFormatted}
+                            span #[strong User:] #{message.user.fullName}
+                            span #[strong Date:] #{message.timestampFormatted}
                         else
                             span User: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
                             span Date: 🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇
                     if currentUserIsAdmin
-                        form(method='POST', action='')
+                        form.deleteMessage(method='POST', action='')
                             input(type='hidden', name='messageId', required='true', value=message._id)
 
-                            button(type='submit') Delete Message
+                            button.delete(type='submit') Delete Message

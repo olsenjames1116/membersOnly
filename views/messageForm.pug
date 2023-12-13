@@ -3,15 +3,15 @@ extends layout
 block content
     h1= title
 
-    form(method='POST', action='')
+    form.main(method='POST', action='')
         label(for='text') Message:
         textarea#text(name='text', required='true', value=message ? message.text : '')
 
-        button(type='submit') Submit
+        button.create(type='submit') Submit
         a(href='/messages')
-            button(type='button') Cancel
+            button.cancel(type='button') Cancel
 
     if errors
-        ul
+        ul.errors
             each error in errors
                 li= error.msg

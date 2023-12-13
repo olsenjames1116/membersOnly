@@ -9,7 +9,9 @@ html
     header 
       nav 
         div.logo
-          a(href='/') Home
+          a(href='/')
+            img(src='/images/grape.png')
+            span Grapevine
         div.links
           if currentUser 
             if !currentUserIsMember
@@ -20,4 +22,8 @@ html
           else
             a(href='/log-in') Log In
             a(href='/sign-up') Sign Up
-    block content
+    main
+      block content
+    footer
+      p Built and designed by 
+        a(href='https://github.com/olsenjames1116') olsenjames1116
