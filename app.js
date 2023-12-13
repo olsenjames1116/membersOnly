@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const helmet = require('helmet');
 const compression = require('compression');
-const RateLimit = require('express-rate-limiter');
+const RateLimit = require('express-rate-limit');
 
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/signUp');
