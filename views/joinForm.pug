@@ -1,15 +1,18 @@
 extends layout
 
 block content
-    h1= title
+    h1.hintTitle= title
 
-    form(method='POST', action='')
+    form.main.user(method='POST', action='')
+        span.hintSubtitle Hint: hover around the page to uncover a clue.
         label(for='code') Code:
         input#code(type='text', name='code', required='true', value=code ? code : '')
 
-        button(type='submit') Submit
+        button.create(type='submit') Submit
 
     if errors
-        ul
+        ul.errors
             each error in errors
                 li= error.msg
+
+    span.hint In what country was the oldest known winery found?

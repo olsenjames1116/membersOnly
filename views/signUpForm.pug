@@ -3,7 +3,7 @@ extends layout
 block content
     h1= title
 
-    form(method='POST', action='')
+    form.main.user(method='POST', action='')
         label(for='firstName') First Name: 
         input#firstName(type='text', name='firstName', placeholder='Peter', required='true', value=user ? user.firstName : '')
 
@@ -19,8 +19,8 @@ block content
         label(for='confirmPassword') Confirm Password:
         input#confirmPassword(type='password', name='confirmPassword', required='true', value=user ? confirmPassword : '')
 
-        button(type='submit') Sign Up
+        button.create(type='submit') Sign Up
     if errors 
-        ul
+        ul.errors
             each error in errors 
                 li= error.msg
