@@ -10,6 +10,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
+const helmet = require('helmet');
+const compression = require('compression');
+const RateLimit = require('express-rate-limiter');
 
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/signUp');
@@ -22,6 +25,13 @@ const adminRouter = require('./routes/admin');
 const User = require('./models/user');
 
 const app = express();
+
+// Set up rate limiter maximum of 20 requests per minute.
+const limiter = RateLimit({
+	windowMs: 1 * 60 * 1000,
+	max: 20,
+});
+app.use(limiter);
 
 // Set up mongoose connection.
 mongoose.set('strictQuery', false);
@@ -95,6 +105,8 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
+app.use(compression());
 
 // Set up routes.
 app.use('/', indexRouter);
