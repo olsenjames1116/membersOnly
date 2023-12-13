@@ -148,7 +148,7 @@ exports.validateUserMembership = [
 		.notEmpty()
 		.withMessage('Input field cannot be left empty.')
 		.custom(async (code) => {
-			if (code !== process.env.MEMBER_CODE) {
+			if (code.toLowerCase() !== process.env.MEMBER_CODE) {
 				throw new Error('Incorrect code.');
 			}
 		}),

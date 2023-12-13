@@ -215,7 +215,8 @@ span.hint {
 	top: 70%;
 	left: 60%;
 
-	&&:hover {
+	&&:hover,
+	&&:focus {
 		color: var(--darkest);
 	}
 }
