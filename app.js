@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-require('dotenv').config();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -13,6 +12,7 @@ const flash = require('connect-flash');
 const helmet = require('helmet');
 const compression = require('compression');
 const RateLimit = require('express-rate-limit');
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/signUp');
@@ -36,10 +36,13 @@ app.use(limiter);
 // Set up mongoose connection.
 mongoose.set('strictQuery', false);
 
-const mongoDB = process.env.PRODDB_URI || process.env.DEVDB_URI;
-mongoose.connect(mongoDB);
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'mongo connection error'));
+const mongoDB = process.env.MONGODB_URI || process.env.DEVDB_URI;
+main().catch((err) => {
+	console.log(err);
+});
+async function main() {
+	await mongoose.connect(mongoDB);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
