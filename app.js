@@ -36,7 +36,7 @@ app.use(limiter);
 // Set up mongoose connection.
 mongoose.set('strictQuery', false);
 
-const mongoDB = process.env.MONGODB_URI || process.env.DEVDB_URI;
+const mongoDB = process.env.DEVDB_URI;
 main().catch((err) => {
 	console.log(err);
 });
