@@ -37,12 +37,9 @@ app.use(limiter);
 mongoose.set('strictQuery', false);
 
 const mongoDB = process.env.PRODDB_URI || process.env.DEVDB_URI;
-main().catch((err) => {
-	console.log(err);
-});
-async function main() {
-	await mongoose.connect(mongoDB);
-}
+mongoose.connect(mongoDB);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'mongo connection error'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
