@@ -12,7 +12,6 @@ const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const helmet = require('helmet');
 const compression = require('compression');
-const RateLimit = require('express-rate-limit');
 
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/signUp');
@@ -25,13 +24,6 @@ const adminRouter = require('./routes/admin');
 const User = require('./models/user');
 
 const app = express();
-
-// Set up rate limiter maximum of 20 requests per minute.
-const limiter = RateLimit({
-	windowMs: 1 * 60 * 1000,
-	max: 20,
-});
-app.use(limiter);
 
 // Set up mongoose connection.
 mongoose.set('strictQuery', false);
