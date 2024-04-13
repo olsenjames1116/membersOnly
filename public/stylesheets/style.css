@@ -224,8 +224,14 @@ span.hint {
 footer {
 	background-color: var(--darkest);
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 	color: white;
+	padding: 5px;
+
+	& p {
+		margin: 0;
+	}
 
 	& a {
 		text-decoration: none;

@@ -34,3 +34,5 @@ This project highlights:
 - dotenv
 - Environment variables
 - Pug
+
+© 2024 James Olsen. All Rights Reserved.
